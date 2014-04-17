@@ -1797,6 +1797,14 @@ static const struct dmi_system_id atkbd_dmi_quirk_table[] __initconst = {
 		.callback = atkbd_setup_deactivate,
 		.driver_data = atkbd_deactivate_lg_fixup,
 	},
+	{
+		.matches = {
+			DMI_MATCH(DMI_SYS_VENDOR, "LG Electronics"),
+			DMI_MATCH(DMI_PRODUCT_NAME, "P1-J273B"),
+		},
+		.callback = atkbd_setup_deactivate,
+		.driver_data = atkbd_deactivate_lg_fixup,
+	},
 	{ }
 };
 
