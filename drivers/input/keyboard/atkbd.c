@@ -699,7 +699,7 @@ static int atkbd_activate(struct atkbd *atkbd)
  * atkbd_deactivate() resets and disables the keyboard from sending
  * keystrokes.
  */
-static void atkbd_deactivate_lg_fixup(struct atkbd *atkbd)
+static void atkbd_deactivate_rst_fixup(struct atkbd *atkbd)
 {
 	ps2_command(&atkbd->ps2dev, NULL, ATKBD_CMD_RESET_DEF);
 }
@@ -1795,7 +1795,7 @@ static const struct dmi_system_id atkbd_dmi_quirk_table[] __initconst = {
 			DMI_MATCH(DMI_PRODUCT_NAME, "LW25-B7HV"),
 		},
 		.callback = atkbd_setup_deactivate,
-		.driver_data = atkbd_deactivate_lg_fixup,
+		.driver_data = atkbd_deactivate_rst_fixup,
 	},
 	{
 		.matches = {
@@ -1803,8 +1803,16 @@ static const struct dmi_system_id atkbd_dmi_quirk_table[] __initconst = {
 			DMI_MATCH(DMI_PRODUCT_NAME, "P1-J273B"),
 		},
 		.callback = atkbd_setup_deactivate,
-		.driver_data = atkbd_deactivate_lg_fixup,
+		.driver_data = atkbd_deactivate_rst_fixup,
 	},
+        {
+                .matches = {
+                        DMI_MATCH(DMI_SYS_VENDOR, "Hewlett-Packard"),
+                        DMI_MATCH(DMI_PRODUCT_NAME, "HP ProBook 4730s"),
+                },
+                .callback = atkbd_setup_deactivate,
+                .driver_data = atkbd_deactivate_rst_fixup,
+        },
 	{ }
 };
 
